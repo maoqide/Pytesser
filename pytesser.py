@@ -1,10 +1,4 @@
 try:
-    import cv2.cv as cv
-    OPENCV_AVAILABLE = True
-except ImportError:
-    OPENCV_AVAILABLE = False
-
-try:
     import cv2
     OPENCV2_AVAILABLE = True
 except ImportError:
@@ -64,11 +58,11 @@ def process_request(input_file, output_file, lang=None, psm=None):
             raise TesseractException, ret[1]
 
 def iplimage_to_string(im, lang=None, psm=None):
-    if not OPENCV_AVAILABLE:
-        print "OpenCV not Available"
+    if not OPENCV2_AVAILABLE:
+        print "OpenCV2 not Available"
         return -1
     else:
-        cv.SaveImage(TEMP_IMAGE, im)
+        cv2.SaveImage(TEMP_IMAGE, im)
         txt = image_to_string(TEMP_IMAGE, lang, psm)
         os.remove(TEMP_IMAGE)
         return txt
